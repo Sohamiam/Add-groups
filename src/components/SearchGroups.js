@@ -13,9 +13,10 @@ function SearchGroups() {
     setGroups(response.data);
   };
 
-  useEffect(() => {
-    handleSearch();
-  }, [query]);
+   useEffect(() => {
+    // useEffect code here
+  }, [handleSearch]);
+ [query];
 
   return (
     <div>
