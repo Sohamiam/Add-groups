@@ -1,22 +1,26 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
-
 function SearchGroups() {
   const [query, setQuery] = useState('');
   const [groups, setGroups] = useState([]);
 
   const handleSearch = async () => {
-    const response = await axios.get('http://localhost:5000/groups/search', {
-      params: { name: query },
-    });
-    setGroups(response.data);
+    try {
+      const response = await axios.get('http://localhost:5000/groups/search', {
+        params: { name: query },
+      });
+      setGroups(response.data);
+    } catch (error) {
+      console.error("Error fetching groups:", error);
+    }
   };
 
-   useEffect(() => {
-    // useEffect code here
-  }, [handleSearch]);
- [query];
+  useEffect(() => {
+    if (query) {
+      handleSearch();
+    }
+  }, [query]);
 
   return (
     <div>
